@@ -1,0 +1,732 @@
+
+-- create test device --
+
+-- Linting and running unit tests --
+
+/data/data/com.termux/files/home/azure-iot-sdks/node/common/core
+
+
+  authorization
+    #stringToSign
+      ✓ returns <resourceUri>\n<expiry>
+    #hmacHash
+      ✓ returns base64-encoded HMAC SHA-256 hash of string-to-sign
+
+  ConnectionString
+    #parse
+      ✓ throws if connection string is missing a required field
+      ✓ returns an object with all the properties of the connection string
+      ✓ accepts an argument that can be converted to String
+
+  createDictionary
+    ✓ finds a key/value pair in the source string
+    ✓ finds more than one key/value pair in the source string
+    ✓ keeps the last value when duplicate keys exist in the connection string
+    ✓ accepts any truthy source argument that is convertible to string
+    ✓ creates no properties when the source string is falsy
+    ✓ creates at most one property when the separator is falsy
+    ✓ ignores consecutive delimiters
+    ✓ ignores keys without values
+    ✓ returns everything after the first equal sign (=) as the property value
+
+  endpoint
+    #devicePath
+      ✓ matches /devices/<device-id>
+    #eventPath
+      ✓ matches /devices/<device-id>/messages/events
+    #messagePath
+      ✓ matches /devices/<device-id>/messages/devicebound
+    #feedbackPath
+      ✓ matches /devices/<device-id>/messages/devicebound/<lockToken>
+
+  errors
+    ✓ ArgumentError inherits from the standard javascript 'Error' object
+    ✓ ArgumentError contains a valid call stack
+    ✓ ArgumentError accepts a message as a constructor argument and populates its message property with it
+    ✓ DeviceMaximumQueueDepthExceededError inherits from the standard javascript 'Error' object
+    ✓ DeviceMaximumQueueDepthExceededError contains a valid call stack
+    ✓ DeviceMaximumQueueDepthExceededError accepts a message as a constructor argument and populates its message property with it
+    ✓ DeviceNotFoundError inherits from the standard javascript 'Error' object
+    ✓ DeviceNotFoundError contains a valid call stack
+    ✓ DeviceNotFoundError accepts a message as a constructor argument and populates its message property with it
+    ✓ FormatError inherits from the standard javascript 'Error' object
+    ✓ FormatError contains a valid call stack
+    ✓ FormatError accepts a message as a constructor argument and populates its message property with it
+    ✓ InternalServerError inherits from the standard javascript 'Error' object
+    ✓ InternalServerError contains a valid call stack
+    ✓ InternalServerError accepts a message as a constructor argument and populates its message property with it
+    ✓ IotHubQuotaExceededError inherits from the standard javascript 'Error' object
+    ✓ IotHubQuotaExceededError contains a valid call stack
+    ✓ IotHubQuotaExceededError accepts a message as a constructor argument and populates its message property with it
+    ✓ MessageTooLargeError inherits from the standard javascript 'Error' object
+    ✓ MessageTooLargeError contains a valid call stack
+    ✓ MessageTooLargeError accepts a message as a constructor argument and populates its message property with it
+    ✓ NotConnectedError inherits from the standard javascript 'Error' object
+    ✓ NotConnectedError contains a valid call stack
+    ✓ NotConnectedError accepts a message as a constructor argument and populates its message property with it
+    ✓ NotImplementedError inherits from the standard javascript 'Error' object
+    ✓ NotImplementedError contains a valid call stack
+    ✓ NotImplementedError accepts a message as a constructor argument and populates its message property with it
+    ✓ ServiceUnavailableError inherits from the standard javascript 'Error' object
+    ✓ ServiceUnavailableError contains a valid call stack
+    ✓ ServiceUnavailableError accepts a message as a constructor argument and populates its message property with it
+    ✓ UnauthorizedError inherits from the standard javascript 'Error' object
+    ✓ UnauthorizedError contains a valid call stack
+    ✓ UnauthorizedError accepts a message as a constructor argument and populates its message property with it
+    ✓ IotHubNotFoundError inherits from the standard javascript 'Error' object
+    ✓ IotHubNotFoundError contains a valid call stack
+    ✓ IotHubNotFoundError accepts a message as a constructor argument and populates its message property with it
+    ✓ JobNotFoundError inherits from the standard javascript 'Error' object
+    ✓ JobNotFoundError contains a valid call stack
+    ✓ JobNotFoundError accepts a message as a constructor argument and populates its message property with it
+    ✓ TooManyDevicesError inherits from the standard javascript 'Error' object
+    ✓ TooManyDevicesError contains a valid call stack
+    ✓ TooManyDevicesError accepts a message as a constructor argument and populates its message property with it
+    ✓ ThrottlingError inherits from the standard javascript 'Error' object
+    ✓ ThrottlingError contains a valid call stack
+    ✓ ThrottlingError accepts a message as a constructor argument and populates its message property with it
+    ✓ DeviceAlreadyExistsError inherits from the standard javascript 'Error' object
+    ✓ DeviceAlreadyExistsError contains a valid call stack
+    ✓ DeviceAlreadyExistsError accepts a message as a constructor argument and populates its message property with it
+    ✓ InvalidEtagError inherits from the standard javascript 'Error' object
+    ✓ InvalidEtagError contains a valid call stack
+    ✓ InvalidEtagError accepts a message as a constructor argument and populates its message property with it
+
+  message
+    #getData
+      ✓ returns the underlying data
+    #getBytes
+      ✓ returns a Buffer when the underlying data is a Buffer
+      ✓ returns a Buffer when the underlying data is NOT a Buffer
+
+  properties
+    #add
+      ✓ adds properties to the collection
+      ✓ attempting to add invalid keys
+    #getItem
+      ✓ returns undefined object when given bad index
+
+  SharedAccessSignature
+    #create
+      ✓ throws when 'resourceUri' is falsy
+      ✓ throws when 'key' is falsy
+      ✓ throws when 'expiry' is falsy
+      ✓ returns a SharedAccessSignature
+      ✓ populates sr with the value of resourceUri
+      ✓ populates sig with the signature generated from resourceUri and expiry
+      ✓ populates skn with the URL-encoded value of keyName
+      ✓ populates se with the value of expiry
+      ✓ does not populate skn if keyName wasn't given
+    #parse
+      ✓ throws if signature doesn't start with 'SharedAccessSignature<space>'
+      ✓ throws if shared access signature is missing sr
+      ✓ throws if shared access signature is missing sig
+      ✓ throws if shared access signature is missing skn
+      ✓ throws if shared access signature is missing se
+      ✓ returns an object with all the properties of the shared access signature
+      ✓ accepts an argument that can be converted to String
+    #toString
+      ✓ returns a signature token
+      ✓ does not include the skn segment if the skn property wasn't defined
+
+
+  93 passing (171ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 98.8% ( 248/251 )
+Branches     : 100% ( 40/40 )
+Functions    : 95.83% ( 46/48 )
+Lines        : 98.77% ( 240/243 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/common/transport/amqp
+
+
+  translateError
+    ✓ returns an 'ArgumentError' if the amqp error description is 'com.microsoft:argument-out-of-range'
+    ✓ returns a generic error object if the error type is unknown
+    ✓ returns an 'UnauthorizedError' if the amqp error description is 'amqp:unauthorized-access'
+    ✓ returns a generic error object if the error type is unknown
+    ✓ returns an 'DeviceNotFoundError' if the amqp error description is 'amqp:not-found'
+    ✓ returns a generic error object if the error type is unknown
+    ✓ returns an 'MessageTooLargeError' if the amqp error description is 'amqp:link-message-size-exceeded'
+    ✓ returns a generic error object if the error type is unknown
+    ✓ returns an 'InternalServerError' if the amqp error description is 'amqp:internal-error'
+    ✓ returns a generic error object if the error type is unknown
+    ✓ returns an 'ServiceUnavailableError' if the amqp error description is 'com.microsoft:timeout'
+    ✓ returns a generic error object if the error type is unknown
+    ✓ returns an 'Error' if the amqp error description is 'unknown'
+    ✓ returns a generic error object if the error type is unknown
+
+  AmqpMessage
+    #fromMessage
+      ✓ throws if message is falsy
+      ✓ creates an AmqpMessage object
+      ✓ always creates a properties object on the AmqpMessage object
+      ✓ maps message.to to amqpMessage.properties.to
+      ✓ does not set amqpMessage.properties.to if message.to isn't set
+      ✓ maps message.expiryTimeUtc to amqpMessage.properties.absoluteExpiryTime
+      ✓ does not set amqpMessage.properties.absoluteExpiryTime if message.expiryTimeUtc isn't set
+      ✓ maps message.messageId to amqpMessage.properties.messageId
+      ✓ does not set amqpMessage.properties.messageId if message.messageId isn't set
+      ✓ does not create amqpMessage.applicationProperties object if the are no application properties
+      ✓ maps message.ack to amqpMessage.applicationProperties['iothub-ack']
+      ✓ does not set amqpMessage.applicationProperties['iothub-ack'] if message.ack isn't set
+      ✓ copies Message body
+      ✓ does not set amqpMessage.body if message does not have a body
+
+  AmqpReceiver
+    #constructor
+      ✓ throws if amqpReceiver is falsy
+    #events
+      ✓ emits a message event when a message is received
+      ✓ emits an errorReceived event when an error is received
+    #complete
+      ✓ throws if message is falsy
+      ✓ calls the done() callback with a null error object and a result of type MessageCompleted
+    #abandon
+      ✓ throws if message is falsy
+      ✓ calls the done() callback with a null error object and a result of type MessageCompleted
+    #reject
+      ✓ throws if message is falsy
+      ✓ calls the done() callback with a null error object and a result of type MessageCompleted
+
+
+  37 passing (176ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 92.52% ( 99/107 )
+Branches     : 73.58% ( 39/53 )
+Functions    : 85.71% ( 12/14 )
+Lines        : 91.92% ( 91/99 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/common/transport/http
+
+
+  Http
+    #parseErrorBody
+      ✓ returns a obect with the error code and message if the error is properly formatted
+      ✓ returns null if the error has incomplete JSON
+      ✓ returns null if the error has no error message
+      ✓ returns null if the error has no error code
+
+
+  4 passing (12ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 34.48% ( 20/58 )
+Branches     : 23.33% ( 7/30 )
+Functions    : 12.5% ( 1/8 )
+Lines        : 34.48% ( 20/58 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/common/transport/mqtt
+
+
+  MqttReceiver
+    #constructor
+      ✓ throws if topic_subscribe is null
+      ✓ throws if topic_subscribe is undefined
+      ✓ throws if topic_subscribe is 
+      ✓ throws if topic_subscribe is 0
+      ✓ throws if mqttClient is null
+      ✓ throws if mqttClient is undefined
+      ✓ throws if mqttClient is 
+      ✓ throws if mqttClient is 0
+    #events
+      ✓ subscribes to the topic when a listener is added (43ms)
+      ✓ emits a message event with a Message object when there is a listener
+      ✓ unsubscribes from the topic when there are no more listeners
+
+  Mqtt
+    #constructor
+      ✓ throws if config structure is falsy
+      ✓ throws if host is falsy
+      ✓ throws if deviceId is falsy
+      ✓ throws if sasToken is falsy
+      ✓ create options structure with config content and return itself (362ms)
+    #publish
+      ✓ throws if message is falsy
+      ✓ calls publish on the MQTT library
+      ✓ does not subscribe to the error event
+    #open
+      ✓ calls the done callback once successfully connected to the server
+      ✓ calls the done callback with an error if we get the 'close' event before connect
+      ✓ calls the done callback with an error if we get the 'offline' event before connect
+      ✓ calls the done callback with an error if we get the 'error' event before connect
+      ✓ calls the done callback with an error if we get the 'disconnect' event before connect
+
+
+  24 passing (557ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 91.18% ( 93/102 )
+Branches     : 86.67% ( 26/30 )
+Functions    : 73.68% ( 14/19 )
+Lines        : 91% ( 91/100 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/device/core
+
+
+  BlobUploadClient
+    #constructor
+      ✓ throws a ReferenceError if 'config' is 'undefined'
+      ✓ throws a ReferenceError if 'config' is 'null'
+      ✓ uses the fileUploadApi passed as a argument instead of the default one if specified
+    #updateSharedAccessSignature
+      ✓ updates the shared access signature with the new one
+    #uploadToBlob
+      ✓ gets the Blob SAS token from the File Upload API
+      ✓ calls the done callback with a BlobSasError if getting the SAS token fails
+      ✓ uploads the stream to the blob
+      ✓ sends the file uploaded notification once done with the upload
+      ✓ sends the file uploaded notification once done with the upload
+      ✓ calls the done callback with no arguments if the upload as completed successfully and IoT Hub has been notified.
+
+  BlobUploadResult
+    #constructor
+      ✓ Assigns the 'isSuccess' parameter to the 'isSuccess' property
+      ✓ Assigns the 'statusCode' parameter to the 'statusCode' property
+      ✓ Assigns the 'statusDescription' parameter to the 'statusDescription' property
+    #fromAzureStorageCallbackArgs
+      ✓ Creates a correct BlobUploadResult instance when the error in an HTTP error
+      ✓ Creates a correct BlobUploadResult instance when the error in not an HTTP error
+      ✓ Creates a correct BlobUploadResult instance when the error is null
+      ✓ Throws a 'ReferenceError' if err is null but body is not provided
+      ✓ Throws a 'ReferenceError' if err is null but response is not provided
+
+  BlobUploader
+    #constructor
+      ✓ creates the 'BlobUploader' instance with the azure-storage package if 'storageApi' is falsy
+      ✓ creates the 'BlobUploader' instance with the 'storageApi' argument if 'storageApi' is truthy
+    #uploadToBlob
+      ✓ throws when 'blobInfo' is 'undefined'
+      ✓ throws when 'blobInfo' is ''
+      ✓ throws when 'blobInfo' is 'null'
+      ✓ throws when 'blobInfo' is '0'
+      ✓ throws when 'stream' is 'undefined'
+      ✓ throws when 'stream' is ''
+      ✓ throws when 'stream' is 'null'
+      ✓ throws when 'stream' is '0'
+      ✓ throws when 'streamSize' is 'undefined'
+      ✓ throws when 'streamSize' is ''
+      ✓ throws when 'streamSize' is 'null'
+      ✓ throws when 'streamSize' is '0'
+      ✓ throws an ArgumentError if 'blobInfo.hostName' is 'null'
+      ✓ throws an ArgumentError if 'blobInfo.hostName' is 'undefined'
+      ✓ throws an ArgumentError if 'blobInfo.hostName' is ''
+      ✓ throws an ArgumentError if 'blobInfo.containerName' is 'null'
+      ✓ throws an ArgumentError if 'blobInfo.containerName' is 'undefined'
+      ✓ throws an ArgumentError if 'blobInfo.containerName' is ''
+      ✓ throws an ArgumentError if 'blobInfo.blobName' is 'null'
+      ✓ throws an ArgumentError if 'blobInfo.blobName' is 'undefined'
+      ✓ throws an ArgumentError if 'blobInfo.blobName' is ''
+      ✓ throws an ArgumentError if 'blobInfo.sasToken' is 'null'
+      ✓ throws an ArgumentError if 'blobInfo.sasToken' is 'undefined'
+      ✓ throws an ArgumentError if 'blobInfo.sasToken' is ''
+      ✓ calls the 'done' callback with the result of the storage api call
+
+  FileUploadApi
+    #constructor
+      ✓ throws if deviceId is 'undefined'
+      ✓ throws if deviceId is 'null'
+      ✓ throws if deviceId is ''
+      ✓ throws if hostname is 'undefined'
+      ✓ throws if hostname is 'null'
+      ✓ throws if hostname is ''
+      ✓ uses the transport provided in the arguments
+    #getBlobSasUri
+      ✓ throws if blobName is 'undefined'
+      ✓ throws if blobName is 'null'
+      ✓ throws if blobName is ''
+      ✓ throws if auth is 'undefined'
+      ✓ throws if auth is 'null'
+      ✓ throws if auth is ''
+      ✓ builds a valid path for the HTTP GET request
+      ✓ builds a valid set of headers with a shared access signature for the HTTP request
+      ✓ builds a valid set of headers with x509 authentication for the HTTP request
+      ✓ calls the done callback with an error if the request fails
+      ✓ calls the done callback with a null error object and a properly formatted result object if the request succeeds
+    #notifyUploadComplete
+      ✓ throws if correlationId is 'undefined'
+      ✓ throws if correlationId is 'null'
+      ✓ throws if correlationId is ''
+      ✓ throws if auth is 'undefined'
+      ✓ throws if auth is 'null'
+      ✓ throws if auth is ''
+      ✓ throws if uploadResult is 'undefined'
+      ✓ throws if uploadResult is 'null'
+      ✓ throws if uploadResult is ''
+      ✓ builds a valid path for the HTTP POST request
+      ✓ builds a valid set of headers with a shared access signature for the HTTP request
+      ✓ builds a valid set of headers and x509 authentication for the HTTP request
+      ✓ builds a valid body for the HTTP request
+      ✓ calls the done callback with an error if the request fails
+      ✓ calls the done callback with no parameters if the request succeeds
+
+
+  78 passing (268ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 100% ( 128/128 )
+Branches     : 93.44% ( 57/61 )
+Functions    : 100% ( 17/17 )
+Lines        : 100% ( 116/116 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/device/transport/amqp
+
+
+  translateError
+    ✓ returns an 'IotHubQuotaExceededError' if the amqp error description is 'amqp:resource-limit-exceeded'
+
+  Amqp
+    #complete
+      ✓ calls the receiver `complete` method
+    #reject
+      ✓ calls the receiver `reject` method
+    #abandon
+      ✓ calls the receiver `abandon` method
+
+
+  4 passing (40ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 77.05% ( 47/61 )
+Branches     : 40% ( 4/10 )
+Functions    : 66.67% ( 12/18 )
+Lines        : 78.33% ( 47/60 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/device/transport/amqp-ws
+No tests
+/data/data/com.termux/files/home/azure-iot-sdks/node/device/transport/http
+
+
+  translateError
+    ✓ returns an 'ArgumentError' if the response status code is '400'
+    ✓ returns an 'UnauthorizedError' if the response status code is '401'
+    ✓ returns an 'IotHubQuotaExceededError' if the response status code is '403'
+    ✓ returns an 'DeviceNotFoundError' if the response status code is '404'
+    ✓ returns an 'MessageTooLargeError' if the response status code is '413'
+    ✓ returns an 'InternalServerError' if the response status code is '500'
+    ✓ returns an 'ServiceUnavailableError' if the response status code is '503'
+
+  HttpReceiver
+    #receiveTimers
+      ✓ receives messages after the set interval
+      ✓ receives messages at the set time
+      ✓ receives messages as configured with a cron string
+    #receive
+      ✓ receives 1 message when receive() is called and drain is false
+      ✓ receives all messages when receive() is called and drain is true
+    #drain
+      ✓ drains the message queue
+    #setOptions
+      ✓ throws if opts.interval is not a number
+      ✓ throws if opts.interval is negative
+      ✓ throws if opts.at is not a date
+      ✓ throws if more than one option is specified
+    abandon
+      ✓ throws if message is falsy
+      ✓ calls the done() callback with a null error object and a result of type MessageAbandoned
+    reject
+      ✓ throws if message is falsy
+      ✓ calls the done() callback with a null error object and a result of type MessageRejected
+    complete
+      ✓ throws if message is falsy
+      ✓ calls the done() callback with a null error object and a result of type MessageCompleted
+
+  Http
+    #setOptions
+      ✓ calls the receiver `setOptions` method
+      ✓ instanciate the receiver if necessary
+      ✓ calls the done callback with no arguments if successful
+      ✓ calls the done callback with an error object if the method is unsuccessful
+      ✓ does not throw if `done` is not specified
+    #complete
+      ✓ calls the receiver `complete` method
+    #reject
+      ✓ calls the receiver `reject` method
+    #abandon
+      ✓ calls the receiver `abandon` method
+    #updateSharedAccessSignature
+      ✓ updates its configuration object with the new shared access signature
+      ✓ updates the receiver configuration with the new shared access signature
+
+
+  33 passing (163ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 70.56% ( 175/248 )
+Branches     : 69.42% ( 84/121 )
+Functions    : 72.22% ( 26/36 )
+Lines        : 70.49% ( 172/244 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/device/transport/mqtt
+
+
+  Mqtt
+    #constructor
+      ✓ stores config and created transport in member (231ms)
+
+  Over simulated MQTT
+    Client
+      #sendEvent
+        ✓ sends the event (632ms)
+        ✓ fails to send an event when the hostname is malformed
+        ✓ fails to send an event when the device is not registered
+        ✓ fails to send an event when the password is wrong
+
+
+  5 passing (896ms)
+
+
+=============================== Coverage summary ===============================
+Statements   : 45.24% ( 19/42 )
+Branches     : 0% ( 0/12 )
+Functions    : 7.69% ( 1/13 )
+Lines        : 50% ( 19/38 )
+================================================================================
+/data/data/com.termux/files/home/azure-iot-sdks/node/service
+
+
+  translateError
+    ✓ returns an 'DeviceMaximumQueueDepthExceededError' if the amqp error description is 'amqp:resource-limit-exceeded'
+
+  Amqp
+    #connect
+      ✓ calls the base transport connect method
+      ✓ does not fail if `done` is not specified or falsy
+    #disconnect
+      ✓ calls the base transport disconnect method
+      ✓ does not fail if `done` is not specified or falsy
+    #getFeedbackReceiver
+      ✓ requests an AmqpReceiver from the feedback endpoint
+    #getFileNotificationReceiver
+      ✓ requests an AmqpReceiver from the file notification endpoint
+
+  AmqpWs
+    #constructor
+      ✓ inherits from `Amqp` (108ms)
+
+  Client
+    #constructor
+      ✓ throws when transport is falsy
+    #fromConnectionString
+      ✓ throws when value is falsy
+      ✓ creates an instance of the default transport
+      ✓ returns an instance of Client
+    #fromSharedAccessSignature
+      ✓ throws when value is falsy
+      ✓ correctly populates the config structure
+      ✓ creates an instance of the default transport
+      ✓ returns an instance of Client
+    #send
+      ✓ throws if deviceId is falsy
+      ✓ throws if message is falsy
+      ✓ does not throw if done is falsy
+
+  Over simulated AMQP
+    Client
+      1) "before all" hook: prepare test subject
+      2) "after all" hook: close the connection
+
+  ConnectionString
+    #parse
+      ✓ throws if connection string is missing HostName
+      ✓ throws if connection string is missing SharedAccessKeyName
+      ✓ throws if connection string is missing SharedAccessKey
+
+  Device
+    #enumerable
+      ✓ is enumerable
+    #constructor
+      ✓ creates a Device with the given id
+      ✓ throws if 'deviceId' is falsy
+      ✓ JSON is created correctly when using symmetric keys
+      ✓ JSON is created correctly when using x509 certificate
+    #deviceId
+      ✓ cannot be configured or deleted
+    #generationId
+      ✓ cannot be configured or deleted
+    #etag
+      ✓ cannot be configured or deleted
+    #connectionState
+      ✓ cannot be configured or deleted
+    #status
+      ✓ cannot be configured or deleted
+      ✓ Assignments allowed to enable and disabled
+    #statusReason
+      ✓ cannot be configured or deleted
+    #connectionStateUpdatedTime
+      ✓ cannot be configured or deleted
+    #statusUpdatedTime
+      ✓ cannot be configured or deleted
+    #lastActivityTime
+      ✓ cannot be configured or deleted
+    #cloudToDeviceMessageCount
+      ✓ cannot be configured or deleted
+    #authentication
+      ✓ cannot be configured or deleted
+
+  translateError
+    ✓ returns a 'ArgumentError' if the response status code is '400'
+    ✓ returns a 'UnauthorizedError' if the response status code is '401'
+    ✓ returns a 'TooManyDevicesError' if the response status code is '403'
+    ✓ returns a 'IotHubNotFoundError' if the response status code is '404'
+    ✓ returns a 'DeviceNotFoundError' if the response status code is '404'
+    ✓ returns a 'DeviceAlreadyExistsError' if the response status code is '412'
+    ✓ returns a 'ThrottlingError' if the response status code is '429'
+    ✓ returns a 'InternalServerError' if the response status code is '500'
+    ✓ returns a 'ServiceUnavailableError' if the response status code is '503'
+    ✓ returns a 'Error' if the response status code is '1337'
+
+  Over simulated HTTPS
+    Registry
+      #fromConnectionString
+        ✓ throws when value is falsy
+        ✓ creates an instance of the default transport
+        ✓ returns an instance of Registry
+      #fromSharedAccessSignature
+        ✓ throws when value is falsy
+        ✓ creates an instance of the default transport
+        ✓ returns an instance of Registry
+      #create
+        ✓ throws when deviceInfo.deviceId is falsy
+        ✓ creates a new device
+        ✓ creates a new device
+        ✓ fails to create device information when the hostname is malformed
+        ✓ fails to create device information when the policy does not exist
+        ✓ fails to create device information when the key is wrong
+      #get
+        ✓ throws if deviceId is falsy
+        ✓ returns information about the given device
+        ✓ fails to get device information when the hostname is malformed
+        ✓ fails to get device information when the policy does not exist
+        ✓ fails to get device information when the key is wrong
+      #list
+        ✓ returns information about a list of devices
+        ✓ fails to list device information when the hostname is malformed
+        ✓ fails to list device information when the policy does not exist
+        ✓ fails to list device information when the key is wrong
+      #update
+        ✓ throws when deviceInfo.deviceId is falsy
+        ✓ updates information about a device
+        ✓ fails to update device information when the hostname is malformed
+        ✓ fails to update device information when the policy does not exist
+        ✓ fails to update device information when the key is wrong
+      #delete
+        ✓ throws if deviceId is falsy
+        ✓ deletes the given device
+        ✓ deletes the given device
+        ✓ fails to delete device information when the hostname is malformed
+        ✓ fails to delete device information when the policy does not exist
+        ✓ fails to delete device information when the key is wrong
+    Registry
+      #importDevicesFromBlob
+        ✓ throws when inputBlobContainerUri is undefined
+        ✓ throws when inputBlobContainerUri is null
+        ✓ throws when inputBlobContainerUri is 
+        ✓ throws when inputBlobContainerUri is 0
+        ✓ throws when outputBlobContainerUri is undefined
+        ✓ throws when outputBlobContainerUri is null
+        ✓ throws when outputBlobContainerUri is 
+        ✓ throws when outputBlobContainerUri is 0
+        ✓ calls the done callback with a job identifier
+        ✓ creates a correct import request
+      #exportDevicesToBlob
+        ✓ throws when outputBlobContainerUri is undefined
+        ✓ throws when outputBlobContainerUri is null
+        ✓ throws when outputBlobContainerUri is 
+        ✓ throws when outputBlobContainerUri is 0
+        ✓ calls the done callback with a job identifier
+        ✓ creates a correct export request when excludeKeys is true
+        ✓ creates a correct export request when excludeKeys is false
+      #listJobs
+        ✓ calls the transport to request a list of jobs and succeeds
+        ✓ calls the transport to request a list of jobs and fails
+      #getJob
+        ✓ throws when jobId is undefined
+        ✓ throws when jobId is null
+        ✓ throws when jobId is 
+        ✓ throws when jobId is 0
+        ✓ calls the transport to request a job status and succeeds
+        ✓ calls the transport to request a job status and fails
+      #cancelJob
+        ✓ throws when jobId is undefined
+        ✓ throws when jobId is null
+        ✓ throws when jobId is 
+        ✓ throws when jobId is 0
+        ✓ calls the transport to cancel a job and succeeds
+        ✓ calls the transport to cancel a job and fails
+
+  SharedAccessSignature
+    #create
+      ✓ creates a shared access signature
+    #parse
+      ✓ throws if shared access signature is missing sr
+      ✓ throws if shared access signature is missing sig
+      ✓ throws if shared access signature is missing skn
+      ✓ throws if shared access signature is missing se
+
+
+  117 passing (500ms)
+  2 failing
+
+  1) Over simulated AMQP Client "before all" hook: prepare test subject:
+     ReferenceError: connStr is 'undefined'
+      at Function.fromConnectionString (lib/client.js:9:1244)
+      at Context.<anonymous> (test/_client_common_testrun.js:22:28)
+
+  2) Over simulated AMQP Client "after all" hook: close the connection:
+     TypeError: Cannot read property 'close' of undefined
+      at Context.<anonymous> (test/_client_common_testrun.js:32:18)
+
+
+
+
+=============================== Coverage summary ===============================
+Statements   : 71.12% ( 298/419 )
+Branches     : 62.75% ( 96/153 )
+Functions    : 68.89% ( 62/90 )
+Lines        : 70.34% ( 287/408 )
+================================================================================
+
+Error 'login' not supported on this platform
+
+Usage
+  iothub-explorer login <connection-string> [--duration=<num-seconds>]
+    Creates a session lasting <num-seconds>; commands during the session can omit <connection-string>
+    Default duration is 3600 (one hour).
+  iothub-explorer logout
+    Cancels any session started by 'login'
+  iothub-explorer [<connection-string>] list [--display="<property>,..."] [--connection-string]
+    Returns a list of (at most 1000) devices
+    Can optionally display only selected properties and/or connection strings.
+  iothub-explorer [<connection-string>] get <device-id> [--display="<property>,..."] [--connection-string]
+    Returns information about the given device
+    Can optionally display just the selected properties and/or the connection string.
+  iothub-explorer [<connection-string>] create <device-id|device-json> [--display="<property>,..."] [--connection-string]
+    Adds the given device to the IoT Hub and displays information about it
+    Can optionally display just the selected properties and/or the connection string.
+  iothub-explorer [<connection-string>] delete <device-id>
+    Deletes the given device from the IoT Hub.
+  iothub-explorer <connection-string> monitor-events <device-id>
+    Monitors and displays the events received from a specific device.
+  iothub-explorer [<connection-string>] send <device-id> <msg> [--ack="none|positive|negative|full"]
+    Sends a cloud-to-device message to the given device, optionally with acknowledgment of receipt
+  iothub-explorer [<connection-string>] receive [--messages=n]
+    Receives feedback about the delivery of cloud-to-device messages; optionally exits after receiving n messages.
+  iothub-explorer [<connection-string>] sas-token <device-id> [--duration=<num-seconds>]
+    Generates a SAS Token for the given device with an expiry time <num-seconds> from now
+    Default duration is 3600 (one hour).
+  iothub-explorer help
+    Displays this help message.
+
+  Use the --display option to show only the given properties from the azure-iothub.Device object.
+  Use the --connection-string option to generate a connection string for the device(s).
+  Add the --raw option to any command (except help) to minimize output and format results as JSON.
